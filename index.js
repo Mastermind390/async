@@ -1,122 +1,71 @@
-/*
 
-let stocks = {
-    fruits: ['strawberry', 'grapes', 'banana', "apple"],
-    liquid: ["water", "ice"],
-    holder: ['cone', "cup", "stick"],
-    toppings: ['chocolate', 'peanuts']
+let IntervalId;
+
+function countdownTo2024() {
+    const targetDate = '2024-01-01';
+    const target = new Date(targetDate);
+
+    const remainingTime = target.getTime() - new Date().getTime();
+    
+
+    const seconds = 1000;
+    const minutes = seconds * 60;
+    const hour = minutes * 60;
+    const day = hour * 24;
+
+
+    const months = Math.floor((remainingTime /day) / 24);
+    
+
+    const days = Math.floor(remainingTime / day);
+   
+
+    const hours = Math.floor((remainingTime % day) / hour);
+    
+
+    const minute = Math.floor((remainingTime % hour) / minutes);
+    
+
+    const second = Math.floor((remainingTime % minutes) / seconds);
+   
+
+    const monthDisplayEl = document.getElementById('month-display').innerHTML = months;
+    const dayDisplayEl = document.getElementById('day-display').innerHTML = days;
+    const hoursDisplayEl = document.getElementById('Hours-display').innerHTML = hours;
+    const minuteDisplayEl = document.getElementById('minutes-display').innerHTML = minute;
+    const secondsDisplayEl = document.getElementById('seconds-display').innerHTML = second;
+
+    const happyNewYear = document.querySelector('.happy-new-year-text');
+
+    
+    
+    IntervalId =  setInterval(()=>{
+        countdownTo2024()
+    }, 1000)
+    
+
+    if (remainingTime < 0) {
+        happyNewYear.innerHTML = 'HAPPY NEW YEAR';
+        clearInterval(IntervalId)
+    }
+    
+
 };
 
-let is_shop_open = true;
+countdownTo2024();
 
-let order = (time, work)=>{
-    return new Promise( (resolve, reject)=>{
-        if (is_shop_open) {
-            setTimeout(()=>{
-                resolve(work())
-            }, time)
-        } else {
-            reject(console.log('customer not served'))
-        }
-    } )
-}
-
-order(2000, ()=>console.log(`${stocks.fruits[2]} was selected`)).then(()=>{
-    return order(0000, ()=>console.log('production started'))
-}).then(()=>{
-    return order(1000, ()=>console.log(`${stocks.liquid[0]} was added`))
-}).then(()=>{
-    return order(1000, ()=>console.log(`${stocks.holder[1]} was selected`))
-}).then(()=>{
-    return order(3000, ()=>console.log(`${stocks.toppings[0]} was selected`))
-}).then(()=>{
-    return order(1000, ()=>console.log('customer is served'))
-}).catch(()=>{
-    console.log('customer left')
-})
-
-
-function one(call_two) {
-    console.log('step 1');
-    call_two()
-}
-
-function two() {
-    console.log('step 2')
-}
-
-one(two)
-
-
-*/
-
-
+//const nums = 16 + 30 + 31 + 30 + 31;
+//console.log(nums)
 
 /*
 
-console.log('callback fired');
-    if(err) {
-        console.log(err)
-    } else {
-        console.log(data)
-    }
+const monthDiff = Math.floor((target.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24) / 24)
+    console.log(monthDiff)
 
+    
+    const daysDiff = Math.floor((target.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+    console.log(daysDiff)
 
-
-    getTodos('todos/todos.json', (data)=>{
-    console.log(data);
-    getTodos('todos/habeeb.json', (data)=>{
-        console.log(data);
-        getTodos('todos/sherifat.json', (data)=>{
-            console.log(data);
-        })
-    })
-});
+    const hoursDiff = Math.floor((target.getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24) / (1000 * 60 * 60) );
 
 */
-
-//console.log(request, request.responseText)
-//console.log('could not fetch the data');
-
-/*
-
-const getTodos = (resource) => {
-
-    return new Promise((resolve, reject)=>{
-
-        const request = new XMLHttpRequest();
-
-        request.addEventListener('readystatechange', ()=>{
-        
-            if(request.readyState === 4 && request.status === 200) {
-                const data = JSON.parse(request.responseText)
-                resolve(data);
-            } else if (request.readyState === 4) {
-                reject('could not fetch data');
-            }
-        })
-        request.open('GET', resource);
-        request.send();
-    });
-}
-
-getTodos('todos/habeeb.json').then(data => {
-    console.log(data);
-    return getTodos('todos/todos.json').then((data)=>{
-        console.log(data)
-        return getTodos('todos/sherifats.json').then((data)=>{
-            console.log(data)
-        })
-    })
-}).catch(err => console.log(err))
-
-*/
-
-fetch('todos/habeeb.json').then((response)=>{
-    console.log(response)
-    return response.json();
-}).then((data)=>{
-    console.log(data)
-}).catch(err => {
-    console.log('error')
-})
